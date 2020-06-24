@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Entry</title>
+</head>
+<body>
+
+    <form method="post" th:object="${hello}" th:action="@{/abc/save}">
+        <label>Enter Room Number: </label>
+        <input type="text" th:field="*{roomNo}" th:value="${hello.getRoomNo()}" placeholder="Room Number">
+
+        <br><br>
+        <label>Enter No Of Row: </label>
+        <input type="text" th:field="*{noOfRow}" th:value="${hello.getNoOfRow()}" placeholder="No of Rows">
+
+        <br><br>
+        <label>Enter Bench per Row: </label>
+        <input type="text" th:field="*{benchPerRow}" th:value="${hello.getBenchPerRow()}" placeholder="Bench per Row">
+
+        <br><br>
+        <label>Bench Capacity</label>
+        <input type="text" th:field="*{benchCapacity}" th:value="${hello.getBenchCapacity()}" placeholder="Bench Capacity">
+
+        <input type="submit" value="Save">
+    </form>
+
+</body>
+</html>

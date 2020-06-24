@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Room</title>
+</head>
+<body>
+    <h1>Display Rooms</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Room Number</th>
+            <th>Number of Row</th>
+            <th>Bench Per Row</th>
+            <th>Bench Capacity</th>
+            <th>Total Capacity</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <a th:href="@{/abc/addNew}">Add New Room</a>
+            <tr th:each="i: ${roomObj}">
+                <td th:text="${i.roomNo}"></td>
+                <td th:text="${i.noOfRow}"></td>
+                <td th:text="${i.benchPerRow}"></td>
+                <td th:text="${i.benchCapacity}"></td>
+                <td th:text="${i.getBenchCapacity()*i.getBenchPerRow()*i.getNoOfRow()}"></td>
+                <td>
+                    <a role="button" th:href="@{'/abc/edit/' +  ${i.roomNo} }">Edit</a>
+                    <a role="button" th:href="@{'/abc/remove/' + ${i.roomNo} }">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
