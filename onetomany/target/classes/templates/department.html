@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Department</title>
+</head>
+<body>
+    <div th:if="${accessTypeFlag}==1">
+        <form th:object="${model}" th:action="@{/department/admin/save}" method="post">
+            <table>
+                <h1 th:if="${Mode}!=2">Add Department</h1>
+                <h1 th:if="${Mode}==2">Edit Department</h1>
+                <tbody>
+                <tr>
+                    <td>Enter Department Id:</td>
+                    <td><input type="text" th:field="*{deptId}" th:value="${model.deptId}" placeholder="Dept Id"></td>
+                </tr>
+                <tr>
+                    <td>Enter Department Name: </td>
+                    <td><input type="text" th:field="*{deptName}" th:value="${model.deptName}" placeholder="Dept Name"></td>
+                </tr>
+                <tr>
+                    <td>Enter Department Code</td>
+                    <td><input type="text" th:field="*{deptCode}" th:value="${model.deptCode}" placeholder="Dept Code"></td>
+                </tr>
+                <tr>
+                    <td>Enter Faculty: </td>
+                    <td>
+                        <select th:field="*{faculty.facultyId}">
+                            <option th:each="f : ${flist}" th:text="${f.facultyName}" th:value="${f.facultyId}"></option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+
+    <div th:if="${Mode}==1">
+        <h1>List Of Departments</h1>
+        <table th:object="${listOfModel}" border="1">
+            <thead>
+            <tr>
+                <td>Dept Id</td>
+                <td>Dept Name</td>
+                <td>Dept Code</td>
+                <td>Faculty</td>
+                <td th:if="${accessTypeFlag}==1">Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="i: ${listOfModel}">
+                <td th:text="${i.deptId}" th:value="${i.deptId}"></td>
+                <td th:text="${i.deptName}"></td>
+                <td th:text="${i.deptCode}"></td>
+                <td th:text="${i.faculty.facultyName}"></td>
+                <td th:if="${accessTypeFlag}==1">
+                    <a role="button" th:href="@{'/department/admin/edit/'+${i.deptId} (modelId=${i.deptId})}"> Edit </a>
+                    <a role="button" th:href="@{'/department/admin/remove/'+${i.deptId} (modelId=${i.deptId}) }">Remove</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
