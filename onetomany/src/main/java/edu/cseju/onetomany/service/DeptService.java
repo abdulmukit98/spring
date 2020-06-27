@@ -9,4 +9,5 @@ public interface DeptService {
     public Department getDepartmentById(String departmentId);
     public void saveOrUpdate(Department department);
     public void removeDepartment(String departmentId);
+    public List<Department> getDepartmentByFaculty(String facultyId);
 }

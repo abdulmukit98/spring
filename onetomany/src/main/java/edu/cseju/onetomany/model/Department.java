@@ -1,9 +1,8 @@
 package edu.cseju.onetomany.model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Department {
@@ -63,5 +62,16 @@ public class Department {
         this.deptName = "";
         this.deptCode = "";
 
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dept", cascade = CascadeType.ALL)
+    private Set<Student> students = new HashSet<Student>();
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

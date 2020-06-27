@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Role View</title>
+</head>
+<body>
+    <h1>Role View</h1>
+    <table th:object="${listofstudent}" border="1">
+        <thead>
+        <tr>
+            <td>Faculty</td>
+            <td>Department</td>
+            <td>Student Roll</td>
+            <td>Student Name</td>
+            <td>Student adress</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i : ${listofstudent}">
+            <td th:text="${i.dept.faculty.facultyName}"></td>
+            <td th:text="${i.dept.deptName}"></td>
+            <td th:text="${i.studentRoll}"></td>
+            <td th:text="${i.studentName}"></td>
+            <td th:text="${i.studentAdress}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a role="button" th:href="@{'/student'}"><h2>Student Page</h2></a>
+</body>
+</html>

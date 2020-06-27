@@ -4,6 +4,7 @@ import edu.cseju.onetomany.model.Department;
 import edu.cseju.onetomany.model.Faculty;
 import edu.cseju.onetomany.service.DeptService;
 import edu.cseju.onetomany.service.FacultyService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -87,6 +88,19 @@ public class DepartmentController {
     {
         deptService.removeDepartment(modelId);
         return new ModelAndView("redirect:/department/admin");
+    }
+
+    @RequestMapping(value = "/faculty/{facultyId}")
+    public ModelAndView findByFaculty(@RequestParam("facultyId") String factultyId)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Department> list = deptService.getDepartmentByFaculty(factultyId);
+        modelAndView.addObject("list",list);
+
+        List<Faculty> flist = facultyService.getAllFaculty();
+        modelAndView.addObject("flist",flist);
+        modelAndView.setViewName("factId");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/admin/edit/{modelId}", method = RequestMethod.GET)

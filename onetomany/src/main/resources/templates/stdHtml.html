@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+    <form th:object="${model}" th:action="@{/student/save}" method="post">
+        <h1>Add/Edit Student</h1>
+        <br><br>
+        <table>
+            <thead>
+            <tr>
+                <td>Enter Student Roll:</td>
+                <td><input type="text" th:field="*{studentRoll}" th:value="${model.studentRoll}" ></td>
+            </tr>
+            <tr>
+                <td>Enter Student Name:</td>
+                <td><input type="text" th:field="*{studentName}" th:value="${model.studentName}"></td>
+            </tr>
+            <tr>
+                <td>Enter Student Adress:</td>
+                <td><input type="text" th:field="*{studentAdress}" th:value="${model.studentAdress}"></td>
+            </tr>
+            <tr>
+                <td>Enter Department</td>
+                <td>
+                    <select th:field="*{dept.deptId}">
+                        <option th:each="i : ${dlist}" th:text="${i.deptName}" th:value="${i.deptId}"></option>
+                    </select>
+                </td>
+            </tr>
+            </thead>
+        </table>
+        <input type="submit" value="Save">
+    </form>
+
+    <br><br>
+    <h1>List of Department</h1>
+    <table th:object="${students}" border="1">
+        <thead>
+        <tr>
+            <td>Students Roll</td>
+            <td>Students Name</td>
+            <td>Students Adress</td>
+            <td>Department</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i : ${students}">
+            <td th:text="${i.studentRoll}"></td>
+            <td th:text="${i.studentName}"></td>
+            <td th:text="${i.studentAdress}"></td>
+            <td th:text="${i.getDept().deptName}"></td>
+            <td>
+                <a role="button" th:href="@{'/student/edit/'+${i.studentRoll} (modelId=${i.studentRoll}) }">Edit</a>
+                <a role="button" th:href="@{'/student/remove/'+${i.studentRoll} (modelId=${i.studentRoll})}" >Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a role="button" th:href="@{'/faculty/admin'}"><h2>Faculty</h2></a>
+    <br>
+    <a role="button" th:href="@{'/department/admin'}"><h2>Department</h2></a>
+    <br><a role="button" th:href="@{'/student/role'}"><h2>Role View</h2></a>
+</body>
+</html>

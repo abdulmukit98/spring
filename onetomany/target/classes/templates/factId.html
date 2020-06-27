@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Id</title>
+</head>
+<body>
+
+    <table border="1" th:object="${flist}">
+        <h2>Search Department By Faculty</h2>
+        <thead><tr><td>Department List</td></tr></thead>
+        <tr th:each=" f : ${flist}">
+            <td th:text="${f.facultyName}"></td>
+            <td><a role="button" th:href="@{'/department/faculty/'+${f.facultyCode} (facultyId = ${f.facultyCode}) }">search</a></td>
+        </tr>
+    </table>
+    <br><br>
+
+    <table border="1" th:object="${list}">
+        <h1>Department List</h1>
+        <thead>
+        <tr>
+            <td>Faculty Name</td>
+            <td>Department Id</td>
+            <td>Department Name</td>
+            <td>Department Code</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i : ${list}">
+            <td th:text="${i.faculty.facultyName}"></td>
+            <td th:text="${i.deptId}"></td>
+            <td th:text="${i.deptName}"></td>
+            <td th:text="${i.deptCode}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a role="button" th:href="@{'/department/admin'}"><h2>Department</h2></a>
+
+</body>
+</html>
