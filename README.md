@@ -1,4 +1,4 @@
-# Mysql-Curd
+## spring boot
 
 spring.datasource.url = jdbc:mysql://localhost:3306/db_seatplan?serverTimezone=UTC
 
